@@ -13,9 +13,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'app.bundle.js'
   },
-  devServer: {
-    contentBase: './dist',
-    hot: true
+  resolve: {
+    alias: {
+      settings: path.resolve(__dirname, 'src/env/prod')
+    }
   },
   plugins: [
     new ExtractTextPlugin('styles.css')

@@ -1,6 +1,8 @@
 import { Component} from 'react'
 import ReactDOM from 'react-dom'
+import settings from 'settings'
 
+console.log(settings.host)
 require('../scss/style.scss')
 
 

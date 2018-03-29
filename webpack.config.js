@@ -1,11 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
   entry: [
     'react-hot-loader/patch',
-    './src/index.html',
+    //'./src/index.html',
     './src/app/App.jsx'
   ],
   output: {
@@ -16,8 +17,24 @@ module.exports = {
     contentBase: './dist',
     hot: true
   },
+  resolve: {
+    modules: [
+      path.resolve('src'),
+      path.resolve('./node_modules'),
+    ],
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      settings: path.resolve(__dirname, 'src/env/dev')
+    }
+  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      filename: 'index.html', 
+      css: '',
+      template: path.resolve(__dirname, 'src/index.ejs'),
+      inject: false
+    }),
   ],
   optimization: {
 		splitChunks: {
