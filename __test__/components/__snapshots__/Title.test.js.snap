@@ -2,12 +2,12 @@
 
 exports[`<Title /> just render with a custom text 1`] = `
 <h2>
-  props.text
+  Hello world
 </h2>
 `;
 
 exports[`<Title /> just render with default props 1`] = `
 <h2>
-  props.text
+  Title here
 </h2>
 `;
