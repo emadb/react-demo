@@ -6,7 +6,6 @@ module.exports = {
   mode: 'development',
   entry: [
     'react-hot-loader/patch',
-    //'./src/index.html',
     './src/app/App.jsx'
   ],
   output: {
@@ -18,11 +17,7 @@ module.exports = {
     hot: true
   },
   resolve: {
-    modules: [
-      path.resolve('src'),
-      path.resolve('./node_modules'),
-    ],
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx'],
     alias: {
       settings: path.resolve(__dirname, 'src/env/dev')
     }
@@ -80,8 +75,5 @@ module.exports = {
         }]
     }
     ]
-  },
-  resolve: {
-    extensions: ['*', '.js', '.jsx']
   }
 }
