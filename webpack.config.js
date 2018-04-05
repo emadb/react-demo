@@ -10,7 +10,7 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js'
+    filename: '[name].bundle.js'
   },
   devServer: {
     contentBase: './dist',
@@ -52,28 +52,10 @@ module.exports = {
 	},
   module: {
     rules: [
-      {
-        enforce: "pre",
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-      }, {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      }, {
-        test: /\.html/, 
-        loader: 'file-loader?name=[name].[ext]', 
-      }, {
-        test: /\.scss$/,
-        use: [{
-            loader: "style-loader" 
-        }, {
-            loader: "css-loader" 
-        }, {
-            loader: "sass-loader", options: { sourceMap: true }
-        }]
-    }
+      { enforce: "pre", test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }, 
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, use: ['babel-loader'] }, 
+      { test: /\.html/, loader: 'file-loader?name=[name].[ext]' }, 
+      { test: /\.scss$/, use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader", options: { sourceMap: true } }]}
     ]
   }
 }

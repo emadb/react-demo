@@ -1,17 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   mode: 'production',
   entry: [
-    './src/index.html',
     './src/app/App.jsx'
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.bundle.js'
+    filename: '[name].bundle.js'
   },
   resolve: {
     alias: {
@@ -19,9 +19,20 @@ module.exports = {
     }
   },
   plugins: [
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin({ filename: 'css/app.css' }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html', 
+      css: 'css/style.css',
+      template: path.resolve(__dirname, 'src/index.ejs'),
+      inject: false
+    }),
   ],
   optimization: {
+    splitChunks: {
+      cacheGroups: {
+          commons: { test: /[\\/]node_modules[\\/]/, name: "vendors", chunks: "all" }
+      }
+    },
     minimizer: [
       new UglifyJsPlugin({
         cache: true,
@@ -31,48 +42,16 @@ module.exports = {
           ecma: 6,
           mangle: true
         },
-        sourceMap: true
+        sourceMap: false
       })
     ],
-		splitChunks: {
-			cacheGroups: {
-				commons: {
-					chunks: "initial",
-					minChunks: 2,
-					maxInitialRequests: 5, 
-					minSize: 0 
-				},
-				vendor: {
-					test: /node_modules/,
-					chunks: "initial",
-					name: "vendor",
-					priority: 10,
-					enforce: true
-				}
-			}
-		}
 	},
   module: {
     rules: [
-      {
-        enforce: "pre",
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-      }, {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: ['babel-loader']
-      }, {
-        test: /\.html/, 
-        loader: 'file-loader?name=[name].[ext]', 
-      }, {
-        test: /\.s[ac]ss$/, 
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })  
-      }
+      { enforce: "pre", test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }, 
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, use: ['babel-loader'] }, 
+      { test: /\.html/, loader: 'file-loader?name=[name].[ext]'}, 
+      { test: /\.scss$/,  use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader']})}
     ]
   }
 }
