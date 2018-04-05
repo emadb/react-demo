@@ -51,7 +51,13 @@ module.exports = {
       { enforce: "pre", test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }, 
       { test: /\.(js|jsx)$/, exclude: /node_modules/, use: ['babel-loader'] }, 
       { test: /\.html/, loader: 'file-loader?name=[name].[ext]'}, 
-      { test: /\.scss$/,  use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: ['css-loader', 'sass-loader']})}
+      { test: /\.scss$/,  use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: [{
+        loader: 'css-loader',
+        options: { minimize: true}
+      },{
+        loader: 'sass-loader',
+        options: { minimize: true }
+      }]})}
     ]
   }
 }
