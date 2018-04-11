@@ -33,18 +33,6 @@ module.exports = {
           commons: { test: /[\\/]node_modules[\\/]/, name: "vendors", chunks: "all" }
       }
     },
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        uglifyOptions: {
-          compress: false,
-          ecma: 6,
-          mangle: true
-        },
-        sourceMap: false
-      })
-    ],
 	},
   module: {
     rules: [

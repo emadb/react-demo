@@ -4,9 +4,9 @@
   "description": "A minimal setup for a reactjs app with webpack 4",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack",
-    "prod": "webpack --config ./webpack.config.prod.js",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode development",
+    "prod": "webpack --config ./webpack.config.prod.js --mode production",
     "test": "jest"
   },
   "jest": {
