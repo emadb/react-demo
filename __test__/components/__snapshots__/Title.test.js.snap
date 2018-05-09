@@ -1,13 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Title /> just render with a custom text 1`] = `
-<h2>
+<h3
+  className="title"
+>
   Hello world
-</h2>
+</h3>
 `;
 
 exports[`<Title /> just render with default props 1`] = `
-<h2>
+<h3
+  className="title"
+>
   Title here
-</h2>
+</h3>
 `;

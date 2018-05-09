@@ -8,6 +8,7 @@ module.exports = {
     'react-hot-loader/patch',
     './src/app/App.jsx'
   ],
+  devtool: 'eval-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js'
@@ -41,7 +42,7 @@ module.exports = {
 	},
   module: {
     rules: [
-      { enforce: "pre", test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }, 
+      // { enforce: "pre", test: /\.(js|jsx)$/, exclude: /node_modules/, loader: "eslint-loader" }, 
       { test: /\.(js|jsx)$/, exclude: /node_modules/, use: ['babel-loader'] }, 
       { test: /\.html/, loader: 'file-loader?name=[name].[ext]' }, 
       { test: /\.scss$/, use: [{ loader: "style-loader" }, { loader: "css-loader" }, { loader: "sass-loader", options: { sourceMap: true } }]}
