@@ -65,6 +65,10 @@ class TodoContainer extends Component {
   }
 
   render() {
+
+    const doneCount = this.state.todolist.filter(t => t.done).length
+    const notDoneCount = this.state.todolist.filter(t => !t.done).length
+
     return (
       <div className="row">
         <div className="col-12">
@@ -78,7 +82,7 @@ class TodoContainer extends Component {
           <TodoList todos={this.state.todolist} onChecked={this.handleCheck}/>
         </div>
         <div className="col-4">
-          <TodoStats />
+          <TodoStats done={doneCount} notDone={notDoneCount} />
         </div>
       </div>
     );
