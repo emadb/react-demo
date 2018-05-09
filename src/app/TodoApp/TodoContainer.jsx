@@ -86,6 +86,7 @@ class TodoContainer extends Component {
 }
 
 function ErrorMessage({msg}) {
+  
   if (msg !== ''){
     return <div className="alert alert-danger" >{msg.error}</div>
   }
