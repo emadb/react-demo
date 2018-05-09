@@ -22,7 +22,7 @@ module.exports = {
     new ExtractTextPlugin({ filename: 'css/app.css' }),
     new HtmlWebpackPlugin({
       filename: 'index.html', 
-      css: 'css/style.css',
+      css: 'css/app.css',
       template: path.resolve(__dirname, 'src/index.ejs'),
       inject: false
     }),
