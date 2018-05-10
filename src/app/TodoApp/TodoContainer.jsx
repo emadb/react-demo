@@ -53,6 +53,7 @@ class TodoContainer extends Component {
       done: false
     }
     
+    // Simulo un ritardo nella risposta
     setTimeout(() => {
       axios
         .post(`${settings.host}/todos/${nextId}`, todo)
