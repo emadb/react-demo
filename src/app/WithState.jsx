@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import dispatcher from './dispatcher'
 
-function withState(MyComponent, reducer, initialState){
+function withState(MyComponent, reducers, initialState){
   return class WithState extends Component {
 
     constructor(){
@@ -12,11 +12,16 @@ function withState(MyComponent, reducer, initialState){
     }
 
     componentWillMount() {
-      dispatcher.register(action => {
-        const newState = reducer(this.state.componentState, action)
+      this.registryId = dispatcher.register(action => {
+        const newState = reducers.reduce((state, r) => r(state, action) , this.state.componentState) 
         this.setState({ componentState: newState })
       })
     }
+    
+    componentWillUnmount() {
+      dispatcher.unregister(this.registryId)  
+    }
+    
     
     render() {
       return (
@@ -27,3 +32,4 @@ function withState(MyComponent, reducer, initialState){
 }
 
 export default withState;
+

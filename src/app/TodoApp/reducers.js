@@ -1,5 +1,5 @@
 
-function todosLoaded(state, action) {
+function reducer1(state, action) {
   if (action.type === 'TODOS_LOADED') {
     return Object.assign(state, {todolist: action.content})
   } 
@@ -19,4 +19,11 @@ function todosLoaded(state, action) {
   return state
 }
 
-export default todosLoaded
+function reducer2(state, action) {
+  if (action.type === 'TODOS_LOADED') {
+    // TODO Fa qualcosa con lo stato
+    return state
+  } 
+}
+
+export default [reducer1, reducer2]
